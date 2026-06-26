@@ -11,7 +11,7 @@ test("user can login", async ({ page }) => {
 
 test("invalid username", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.goto();
+  console.log("Line changed here from pause to log");
   await loginPage.login(USERS.invalid.username, USERS.invalid.password);
   expect(
     page.getByText(
