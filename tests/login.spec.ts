@@ -12,6 +12,7 @@ test("user can login", async ({ page }) => {
 test("invalid username", async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
+  await page.pause();
   await loginPage.login(USERS.invalid.username, USERS.invalid.password);
   expect(
     page.getByText(
