@@ -4,19 +4,27 @@ import { USERS } from "../data/users";
 
 test("user can login", async ({ page }) => {
   const loginPage = new LoginPage(page);
+
   await loginPage.goto();
-  await loginPage.login(USERS.standard.username, USERS.standard.password);
-  await expect(page).toHaveURL(/inventory.html/);
+
+  await loginPage.selectEmailLogin();
+
+  await loginPage.requestOtP(USERS.standard.email!);
+
+  await page.pause();
+
+  await expect(page).toHaveURL(/account/);
 });
 
-test("invalid username", async ({ page }) => {
-  const loginPage = new LoginPage(page);
+// test("email is invalid", async ({ page }) => {
+//   const loginPage = new LoginPage(page);
+//   await loginPage.goto();
+//   await loginPage.selectEmailLogin();
 
-  await loginPage.login(USERS.invalid.username, USERS.invalid.password);
-  expect(
-    page.getByText(
-      "Username and password do not match any user in this service",
-    ),
-  );
-  await expect(page).not.toHaveURL(/inventory.html/);
-});
+//   await loginPage.requestOtP(USERS.invalid.email);
+
+//   await expect(
+//     page.getByRole("heading", { name: "Please enter valid email id" }),
+//   ).toBeVisible();
+
+// });

@@ -1,16 +1,8 @@
 export const USERS = {
   standard: {
-    username: "standard_user",
-    password: "secret_sauce",
+    email: process.env.staSTANDARD_EMAIL,
   },
-
-  locked: {
-    username: "locked_out_user",
-    password: "secret_sauce",
-  },
-
   invalid: {
-    username: "wrong_user",
-    password: "wrong_password",
-  },
+    email: "notanemail", // missing @ and domain
+  }
 };
